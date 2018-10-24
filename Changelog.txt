@@ -1,3 +1,6 @@
+v1.9 - November 20th, 2017
+o Added Spanish Latin translation, courtsey of [url=https://www.simplemachines.org/community/index.php?action=profile;u=322597]Rock Lee[/url].
+
 v1.8 - November 19th, 2017
 o Added option to change PM quick reply display options globally.
 o Corrected PM quick reply display string to reflect that the option is for PMs.

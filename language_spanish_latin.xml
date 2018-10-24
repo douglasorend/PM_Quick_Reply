@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE modification SYSTEM "http://www.simplemachines.org/xml/modification">
+<modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
+<id>Dougiefresh:PMQuickReply</id>
+<name>PM Quick Reply</name>
+<version>1.9</version>
+
+<file name="$languagedir/Profile.spanish_latin.php" error="skip">
+	<operation>
+		<search position="before"><![CDATA[$txt['calendar_start_day'] = 'Primer d&iacute;a de la semana en el calendario';]]></search>
+		<add><![CDATA[
+$txt['display_pm_quick_reply'] = 'Utilice la respuesta r&aacute;pida en la pantalla de Mensaje(s) Privado(s): ';
+$txt['display_quick_reply1'] = 'No mostrar en absoluto';
+$txt['display_quick_reply2'] = 'Mostrar, desactivado por defecto';
+$txt['display_quick_reply3'] = 'Mostrar, activar de forma predeterminada';]]></add>
+	</operation>
+</file>
+</modification>

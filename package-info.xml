@@ -5,7 +5,7 @@
 	<id>Dougiefresh:PMQuickReply</id>
 	<name>PM Quick Reply</name>
 	<type>modification</type>
-	<version>1.8</version>
+	<version>1.9</version>
 
 	<install for="2.0 - 2.0.99">
 		<readme parsebbc="true">readme.txt</readme>
@@ -13,12 +13,16 @@
 		<modification>language_english.xml</modification>
 		<modification>language_portuguese_pt.xml</modification>
 		<modification>language_portuguese_pt-utf8.xml</modification>
+		<modification>language_spanish_latin.xml</modification>
+		<modification>language_spanish_latin-utf8.xml</modification>
 	</install>
 	<uninstall for="2.0 - 2.0.99">
 		<modification type="file" reverse="true">install_20x.xml</modification>
 		<modification type="file" reverse="true">language_english.xml</modification>
 		<modification type="file" reverse="true">language_portuguese_pt.xml</modification>
 		<modification type="file" reverse="true">language_portuguese_pt-utf8.xml</modification>
+		<modification type="file" reverse="true">language_spanish_latin.xml</modification>
+		<modification type="file" reverse="true">language_spanish_latin-utf8.xml</modification>
 	</uninstall>
 
 	<install for="2.1 Beta 1">
@@ -27,11 +31,15 @@
 		<modification>language_english.xml</modification>
 		<modification>language_portuguese_pt.xml</modification>
 		<modification>language_portuguese_pt-utf8.xml</modification>
+		<modification>language_spanish_latin.xml</modification>
+		<modification>language_spanish_latin-utf8.xml</modification>
 	</install>
 	<uninstall for="2.1 Beta 1">
 		<modification type="file" reverse="true">install_21x.xml</modification>
 		<modification type="file" reverse="true">language_english.xml</modification>
 		<modification type="file" reverse="true">language_portuguese_pt.xml</modification>
 		<modification type="file" reverse="true">language_portuguese_pt-utf8.xml</modification>
+		<modification type="file" reverse="true">language_spanish_latin.xml</modification>
+		<modification type="file" reverse="true">language_spanish_latin-utf8.xml</modification>
 	</uninstall>
 </package-info>
