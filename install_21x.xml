@@ -5,6 +5,17 @@
 <name>PM Quick Reply</name>
 <version>1.2</version>
 
+<file name="$sourcedir/Profile.php">
+	<operation>
+		<search position="replace"><![CDATA[if (empty($post_errors))
+		loadLanguage('Profile+Drafts');]]></search>
+		<add><![CDATA[if (empty($post_errors))
+	{
+		loadLanguage('Profile+Drafts');
+		loadLanguage('EnhancedPMSystem');
+	}]]></add>
+	</operation>
+</file>
 <file name="$sourcedir/PersonalMessage.php">
 	<operation>
 		<search position="before"><![CDATA[global $txt, $scripturl, $modSettings, $context, $subjects_request]]></search>
@@ -18,7 +29,8 @@
 	<operation>
 		<search position="after"><![CDATA[}
 
-// Get a personal message for the theme.  (used to save memory.)]]></search>
+/**
+ * Get a personal message for the theme.  (used to save memory.)]]></search>
 		<add><![CDATA[// Edit: Extract out the spam settings - cause it's neat.
 	list ($modSettings['max_pm_recipients'], $modSettings['pm_posts_verification'], $modSettings['pm_posts_per_hour']) = explode(',', $modSettings['pm_spam_settings']);
 
@@ -33,7 +45,6 @@
 		$context['require_verification'] = create_control_verification($verificationOptions);
 		$context['visual_verification_id'] = $verificationOptions['id'];
 	}
-	$context['copy_to_outbox'] = !empty($options['copy_to_outbox']);
 
 	// No check for the previous submission is needed.
 	checkSubmitOnce('free');
@@ -62,89 +73,6 @@
 	]]></add>
 	</operation>
 </file>
-<file name="$boarddir/Themes/core/PersonalMessage.template.php" error="skip">
-	<operation>
-		<search position="after"><![CDATA[}
-
-// Just list all the personal message subjects - to make templates easier.]]></search>
-		<add><![CDATA[
-	// Show the quick-reply box for PMs:
-	if ($context['can_send_pm'] && !empty($options['display_pm_quick_reply']))
-	{
-		echo '
-<br />
-<a id="quickreply"></a>
-<div class="tborder" id="quickreplybox">
-	<div class="cat_bar">
-		<h3 class="catbg">
-			<span class="ie6_header floatleft"><a href="javascript:oQuickReply.swap();">
-				<img src="', $settings['images_url'], '/', $options['display_pm_quick_reply'] == 2 ? 'collapse' : 'expand', '.gif" alt="+" id="quickReplyExpand" class="icon" />
-			</a>
-			<a href="javascript:oQuickReply.swap();">', $txt['quick_reply'], '</a>
-			</span>
-		</h3>
-	</div>
-	<div id="quickReplyOptions"', $options['display_pm_quick_reply'] == 2 ? '' : ' style="display: none"', '>
-		<span class="upperframe"><span></span></span>
-		<div class="roundframe">
-			<p class="smalltext lefttext">', $txt['quick_reply_desc'], '</p>
-			<form action="', $scripturl, '?action=pm;sa=send2;pmsg=', !empty($context['pm_quick_reply']['id']) ? $context['pm_quick_reply']['id'] : 0, '" method="post" accept-charset="', $context['character_set'], '" name="postmodify" id="postmodify" class="flow_hidden" onsubmit="submitonce(this);smc_saveEntities(\'postmodify\', [\'subject\', \'message\']);">
-				<div style="display: none">
-					<input type="text" name="subject" value="', $context['pm_quick_reply']['subject'], '" tabindex="', $context['tabindex']++, '" size="60" maxlength="60" />
-				</div>
-				<div class="quickReplyContent">
-					<textarea cols="600" rows="7" name="message" tabindex="', $context['tabindex']++, '"></textarea>
-				</div>';
-
-		// Require an image to be typed to save spamming?
-		if ($context['require_verification'])
-		{
-			echo '
-				<div class="post_verification">
-					<strong>', $txt['pm_visual_verification_label'], ':</strong>
-					', template_control_verification($context['visual_verification_id'], 'all'), '
-				</div>';
-		}
-		
-		echo '
-				<div class="righttext padding">
-					<input type="submit" name="post" value="', $txt['post'], '" onclick="return submitThisOnce(this);" accesskey="s" tabindex="', $context['tabindex']++, '" class="button_submit" />
-					<input type="submit" name="preview" value="', $txt['preview'], '" onclick="return submitThisOnce(this);" accesskey="p" tabindex="', $context['tabindex']++, '" class="button_submit" />
-				</div>
-				<input type="hidden" name="to" id="to_control" value="', empty($context['pm_quick_reply']['recipients']) ? '' : '&quot;' . implode('&quot;, &quot;', $context['pm_quick_reply']['recipients']) . '&quot;', '" />
-				<input type="hidden" name="bcc" id="bcc_control" value="" />
-				<input type="hidden" name="outbox" id="outbox" value="1" />
-				<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
-				<input type="hidden" name="seqnum" value="', $context['form_sequence_number'], '" />
-				<input type="hidden" name="replied_to" value="', !empty($context['pm_quick_reply']['id']) ? $context['pm_quick_reply']['id'] : 0, '" />
-				<input type="hidden" name="pm_head" value="', !empty($context['pm_quick_reply']['pm_head']) ? $context['pm_quick_reply']['pm_head'] : 0, '" />
-				<input type="hidden" name="f" value="', isset($context['folder']) ? $context['folder'] : '', '" />
-				<input type="hidden" name="l" value="', isset($context['current_label_id']) ? $context['current_label_id'] : -1, '" />
-			</form>
-		</div>
-		<span class="lowerframe"><span></span></span>
-	</div>
-</div>
-<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/PersonalMessage.js?fin20"></script>
-<script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/topic.js"></script>
-<script type="text/javascript"><!-- // --><![CDATA[<]]><![CDATA[![CDATA[
-	var oQuickReply = new QuickReply({
-		bDefaultCollapsed: ', !empty($options['display_pm_quick_reply']) && $options['display_pm_quick_reply'] == 2 ? 'false' : 'true', ',
-		iTopicId: 0,
-		iStart: 0,
-		sScriptUrl: smf_scripturl,
-		sImagesUrl: "', $settings['images_url'], '",
-		sContainerId: "quickReplyOptions",
-		sImageId: "quickReplyExpand",
-		sImageCollapsed: "collapse.gif",
-		sImageExpanded: "expand.gif",
-		sJumpAnchor: "quickreply"
-	});
-// ]]]]><![CDATA[></script>';
-	}
-]]></add>
-	</operation>
-</file>		
 <file name="$themedir/PersonalMessage.template.php">
 	<operation>
 		<search position="after"><![CDATA[}
@@ -159,14 +87,11 @@
 <div class="tborder" id="quickreplybox">
 	<div class="cat_bar">
 		<h3 class="catbg">
-			<span class="ie6_header floatleft"><a href="javascript:oQuickReply.swap();">
-				<img src="', $settings['images_url'], '/', $options['display_pm_quick_reply'] == 2 ? 'collapse' : 'expand', '.gif" alt="+" id="quickReplyExpand" class="icon" />
-			</a>
-			<a href="javascript:oQuickReply.swap();">', $txt['quick_reply'], '</a>
-			</span>
+			<span class="toggle_up floatright" id="upshrink_ic" title="', $txt['hide_infocenter'], '" style="display: none;"></span>
+			<a href="#" id="upshrink_link">', $txt['quick_reply'], '</a>
 		</h3>
 	</div>
-	<div id="quickReplyOptions"', $options['display_pm_quick_reply'] == 2 ? '' : ' style="display: none"', '>
+	<div id="quickReplyOptions" style="display: none">
 		<span class="upperframe"><span></span></span>
 		<div class="roundframe">
 			<p class="smalltext lefttext">', $txt['quick_reply_desc'], '</p>
@@ -195,7 +120,6 @@
 				</div>
 				<input type="hidden" name="to" id="to_control" value="', empty($context['pm_quick_reply']['recipients']) ? '' : '&quot;' . implode('&quot;, &quot;', $context['pm_quick_reply']['recipients']) . '&quot;', '" />
 				<input type="hidden" name="bcc" id="bcc_control" value="" />
-				<input type="hidden" name="outbox" id="outbox" value="1" />
 				<input type="hidden" name="', $context['session_var'], '" value="', $context['session_id'], '" />
 				<input type="hidden" name="seqnum" value="', $context['form_sequence_number'], '" />
 				<input type="hidden" name="replied_to" value="', !empty($context['pm_quick_reply']['id']) ? $context['pm_quick_reply']['id'] : 0, '" />
@@ -207,20 +131,38 @@
 		<span class="lowerframe"><span></span></span>
 	</div>
 </div>
-<script type="text/javascript" src="', $settings['default_theme_url'], '/scripts/PersonalMessage.js?fin20"></script>
 <script type="text/javascript" src="' . $settings['default_theme_url'] . '/scripts/topic.js"></script>
 <script type="text/javascript"><!-- // --><![CDATA[<]]><![CDATA[![CDATA[
-	var oQuickReply = new QuickReply({
-		bDefaultCollapsed: ', !empty($options['display_pm_quick_reply']) && $options['display_pm_quick_reply'] == 2 ? 'false' : 'true', ',
-		iTopicId: 0,
-		iStart: 0,
-		sScriptUrl: smf_scripturl,
-		sImagesUrl: "', $settings['images_url'], '",
-		sContainerId: "quickReplyOptions",
-		sImageId: "quickReplyExpand",
-		sImageCollapsed: "collapse.gif",
-		sImageExpanded: "expand.gif",
-		sJumpAnchor: "quickreply"
+	var oInfoCenterToggle = new smc_Toggle({
+		bToggleEnabled: true,
+		bCurrentlyCollapsed: ', empty($options['collapse_header_ic']) ? 'false' : 'true', ',
+		aSwappableContainers: [
+			\'quickReplyOptions\'
+		],
+		aSwapImages: [
+			{
+				sId: \'upshrink_ic\',
+				altExpanded: ', JavaScriptEscape($txt['hide_infocenter']), ',
+				altCollapsed: ', JavaScriptEscape($txt['show_infocenter']), '
+			}
+		],
+		aSwapLinks: [
+			{
+				sId: \'upshrink_link\',
+				msgExpanded: ', JavaScriptEscape($txt['quick_reply']), ',
+				msgCollapsed: ', JavaScriptEscape($txt['quick_reply']), '
+			}
+		],
+		oThemeOptions: {
+			bUseThemeSettings: ', $context['user']['is_guest'] ? 'false' : 'true', ',
+			sOptionName: \'collapse_header_ic\',
+			sSessionId: smf_session_id,
+			sSessionVar: smf_session_var,
+		},
+		oCookieOptions: {
+			bUseCookie: ', $context['user']['is_guest'] ? 'true' : 'false', ',
+			sCookieName: \'upshrinkIC\'
+		}
 	});
 // ]]]]><![CDATA[></script>';
 	}
@@ -229,8 +171,9 @@
 </file>		
 <file name="$themedir/Profile.template.php">
 	<operation>
-		<search position="before"><![CDATA[<input type="checkbox" name="default_options[pm_remove_inbox_label]" id="pm_remove_inbox_label" value="1"', !empty($context['member']['options']['pm_remove_inbox_label']) ? ' checked="checked"' : '', ' class="input_check" />]]></search>
-		<add><![CDATA[
+		<search position="replace"><![CDATA[<input type="checkbox" name="default_options[pm_remove_inbox_label]" id="pm_remove_inbox_label" value="1"', !empty($context['member']['options']['pm_remove_inbox_label']) ? ' checked' : '', ' class="input_check">
+								</dd>';]]></search>
+		<add><![CDATA[<input type="checkbox" name="default_options[pm_remove_inbox_label]" id="pm_remove_inbox_label" value="1"', !empty($context['member']['options']['pm_remove_inbox_label']) ? ' checked' : '', ' class="input_check">
 								</dd>
 						</dl>
 						<hr />
@@ -243,7 +186,8 @@
 											<option value="0"', empty($context['member']['options']['display_pm_quick_reply']) ? ' selected="selected"' : '', '>', $txt['display_quick_reply1'], '</option>
 											<option value="1"', !empty($context['member']['options']['display_pm_quick_reply']) && $context['member']['options']['display_pm_quick_reply'] == 1 ? ' selected="selected"' : '', '>', $txt['display_quick_reply2'], '</option>
 											<option value="2"', !empty($context['member']['options']['display_pm_quick_reply']) && $context['member']['options']['display_pm_quick_reply'] == 2 ? ' selected="selected"' : '', '>', $txt['display_quick_reply3'], '</option>
-										</select>]]></add>
+										</select>
+								</dd>';]]></add>
 	</operation>
 </file>
 </modification>
