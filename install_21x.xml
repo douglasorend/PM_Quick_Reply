@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:PMQuickReply</id>
 <name>PM Quick Reply</name>
-<version>1.2</version>
+<version>1.3</version>
 
 <file name="$sourcedir/Profile.php">
 	<operation>
@@ -97,7 +97,7 @@
 			<p class="smalltext lefttext">', $txt['quick_reply_desc'], '</p>
 			<form action="', $scripturl, '?action=pm;sa=send2;pmsg=', !empty($context['pm_quick_reply']['id']) ? $context['pm_quick_reply']['id'] : 0, '" method="post" accept-charset="', $context['character_set'], '" name="postmodify" id="postmodify" class="flow_hidden" onsubmit="submitonce(this);smc_saveEntities(\'postmodify\', [\'subject\', \'message\']);">
 				<div style="display: none">
-					<input type="text" name="subject" value="', $context['pm_quick_reply']['subject'], '" tabindex="', $context['tabindex']++, '" size="60" maxlength="60" />
+					<input type="text" name="subject" value="', (!empty($context['pm_quick_reply']['subject']) ? $context['pm_quick_reply']['subject'] : ''), '" tabindex="', $context['tabindex']++, '" size="60" maxlength="60" />
 				</div>
 				<div class="quickReplyContent">
 					<textarea cols="600" rows="7" name="message" tabindex="', $context['tabindex']++, '"></textarea>
