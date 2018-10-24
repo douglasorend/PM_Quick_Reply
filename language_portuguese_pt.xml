@@ -3,9 +3,9 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:PMQuickReply</id>
 <name>PM Quick Reply</name>
-<version>1.6</version>
+<version>1.7</version>
 
-<file name="$languagedir/Profile.portuguese_pt.php">
+<file name="$languagedir/Profile.portuguese_pt.php" error="skip">
 	<operation>
 		<search position="before"><![CDATA[$txt['calendar_start_day'] = 'Primeiro dia da semana no calendário';]]></search>
 		<add><![CDATA[
