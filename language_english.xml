@@ -3,13 +3,13 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:PMQuickReply</id>
 <name>PM Quick Reply</name>
-<version>1.7</version>
+<version>1.8</version>
 
 <file name="$languagedir/Profile.english.php">
 	<operation>
 		<search position="before"><![CDATA[$txt['calendar_start_day'] = 'First day of the week on the calendar';]]></search>
 		<add><![CDATA[
-$txt['display_pm_quick_reply'] = 'Use quick reply on topic display: ';
+$txt['display_pm_quick_reply'] = 'Use quick reply on PM display: ';
 $txt['display_quick_reply1'] = 'don\'t show at all';
 $txt['display_quick_reply2'] = 'show, off by default';
 $txt['display_quick_reply3'] = 'show, on by default';]]></add>

@@ -1,3 +1,7 @@
+v1.8 - November 19th, 2017
+o Added option to change PM quick reply display options globally.
+o Corrected PM quick reply display string to reflect that the option is for PMs.
+
 v1.7 - Agust 26th, 2017
 o Fixed Portuguese_PT language files so that non-portuguese forums skip operations.
 
