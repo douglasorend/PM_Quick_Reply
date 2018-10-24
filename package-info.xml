@@ -4,8 +4,8 @@
 <package-info xmlns="http://www.simplemachines.org/xml/package-info" xmlns:smf="http://www.simplemachines.org/">
 	<id>Dougiefresh:PMQuickReply</id>
 	<name>PM Quick Reply</name>
-	<version>1.4</version>
 	<type>modification</type>
+	<version>1.5</version>
 
 	<install for="2.0 - 2.0.99">
 		<readme parsebbc="true">readme.txt</readme>

@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:PMQuickReply</id>
 <name>PM Quick Reply</name>
-<version>1.4</version>
+<version>1.5</version>
 
 <file name="$sourcedir/Profile.php">
 	<operation>
@@ -77,7 +77,9 @@
 	<operation>
 		<search position="after"><![CDATA[}
 
-// Just list all the personal message subjects - to make templates easier.]]></search>
+/**
+ * Just list all the personal message subjects - to make templates easier.
+ */]]></search>
 		<add><![CDATA[
 	// Show the quick-reply box for PMs:
 	if ($context['can_send_pm'] && !empty($options['display_pm_quick_reply']) && !empty($context['pm_quick_reply']))

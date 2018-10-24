@@ -1,5 +1,5 @@
 [hr]
-[center][color=red][size=16pt][b]PM QUICK REPLY v1.4[/b][/size][/color]
+[center][color=red][size=16pt][b]PM QUICK REPLY v1.5[/b][/size][/color]
 [url=http://www.simplemachines.org/community/index.php?action=profile;u=253913][b]By Dougiefresh[/b][/url] -> [url=http://custom.simplemachines.org/mods/index.php?mod=4047]Link to Mod[/url]
 [/center]
 [hr]
@@ -8,7 +8,7 @@
 This mod adds a quick reply box to the Personal Message (PM) area when viewing PMs, as well as per-user options to show, hide or disable the PM Quick Reply box.
 
 [color=blue][b][size=12pt][u]Compatibility Notes[/u][/size][/b][/color]
-This mod was tested on SMF 2.0.10, but should work on any version of SMF 2.0.x.  SMF 1.x is not and will not be supported.
+This mod was tested on SMF 2.0.10, but should work on SMF 2.1 Beta 3, as well as any version of SMF 2.0.x.  SMF 2.1 Beta 1 and 2, as wella as SMF 1.x, is not and will not be supported.
 
 This mod should [b]NOT[/b] be used with [url=http://custom.simplemachines.org/mods/index.php?mod=3736]Enhanced PM System[/url] versions 3.0 and higher, as that mod will have this mod integrated into it.  It may be used with versions below v3.0, however, the "copy to outbox" checkbox may still be active and may not properly save your quick PMs as part of the conversation.  This is due to the Enhanced PM System mod not "fixing" this member option within the source file before displaying the template.
 

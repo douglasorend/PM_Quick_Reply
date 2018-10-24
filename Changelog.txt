@@ -1,3 +1,7 @@
+v1.5 - July 11th, 2017
+o Added support for SMF 2.1 Beta 3.
+o Removed support for SMF 2.1 Beta 1 and 2.
+
 v1.4 - June 8th, 2015
 o Added additional restriction so PM Quick Reply isn't shown if no PMs are present.
 o Fixed undefined index error in [b]PersonalMessage.template.php[/b] for SMF 2.0.
