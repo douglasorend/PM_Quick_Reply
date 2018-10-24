@@ -1,0 +1,5 @@
+v1.1 - May 15th, 2015
+o PM Quick Reply settings moved to the PM Settings template.
+
+v1.0 - May 10th, 2015
+o Initial release to the public

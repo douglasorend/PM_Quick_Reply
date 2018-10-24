@@ -3,7 +3,7 @@
 <modification xmlns="http://www.simplemachines.org/xml/modification" xmlns:smf="http://www.simplemachines.org/">
 <id>Dougiefresh:PMQuickReply</id>
 <name>PM Quick Reply</name>
-<version>1.0</version>
+<version>1.1</version>
 
 <file name="$sourcedir/PersonalMessage.php">
 	<operation>
@@ -229,16 +229,21 @@
 </file>		
 <file name="$themedir/Profile.template.php">
 	<operation>
-		<search position="after"><![CDATA[<label for="display_quick_mod">', $txt['display_quick_mod'], '</label>]]></search>
-		<add><![CDATA[<label for="display_pm_quick_reply">', $txt['display_pm_quick_reply'], '</label>
-								<select name="default_options[display_pm_quick_reply]" id="display_pm_quick_reply">
-									<option value="0"', empty($context['member']['options']['display_pm_quick_reply']) ? ' selected="selected"' : '', '>', $txt['display_quick_reply1'], '</option>
-									<option value="1"', !empty($context['member']['options']['display_pm_quick_reply']) && $context['member']['options']['display_pm_quick_reply'] == 1 ? ' selected="selected"' : '', '>', $txt['display_quick_reply2'], '</option>
-									<option value="2"', !empty($context['member']['options']['display_pm_quick_reply']) && $context['member']['options']['display_pm_quick_reply'] == 2 ? ' selected="selected"' : '', '>', $txt['display_quick_reply3'], '</option>
-								</select>
-							</li>
-							<li>
-								]]></add>
+		<search position="before"><![CDATA[<input type="checkbox" name="default_options[pm_remove_inbox_label]" id="pm_remove_inbox_label" value="1"', !empty($context['member']['options']['pm_remove_inbox_label']) ? ' checked="checked"' : '', ' class="input_check" />]]></search>
+		<add><![CDATA[
+								</dd>
+						</dl>
+						<hr />
+						<dl>
+								<dt>
+										<label for="display_pm_quick_reply">', $txt['display_pm_quick_reply'], '</label>
+								</dt>
+								<dd>
+										<select name="default_options[display_pm_quick_reply]" id="display_pm_quick_reply">
+											<option value="0"', empty($context['member']['options']['display_pm_quick_reply']) ? ' selected="selected"' : '', '>', $txt['display_quick_reply1'], '</option>
+											<option value="1"', !empty($context['member']['options']['display_pm_quick_reply']) && $context['member']['options']['display_pm_quick_reply'] == 1 ? ' selected="selected"' : '', '>', $txt['display_quick_reply2'], '</option>
+											<option value="2"', !empty($context['member']['options']['display_pm_quick_reply']) && $context['member']['options']['display_pm_quick_reply'] == 2 ? ' selected="selected"' : '', '>', $txt['display_quick_reply3'], '</option>
+										</select>]]></add>
 	</operation>
 </file>
 </modification>
